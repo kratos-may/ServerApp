@@ -16,3 +16,8 @@ if( process.env.NODE_ENV === 'dev'){
     urlDB = process.env.MONGO_URI;
 }
 process.env.URLDB = urlDB;
+//==========================
+//JsonWebToken
+//==========================
+process.env.CADUCIDAD_TOKEN = 60*60*24*30;
+process.env.SEED = process.env.SEED || "secret_key_21459841";

@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 // rutas
-app.use(require("./routes/usuario.route"))
+app.use(require("./routes/index"));
 mongoose.connect(process.env.URLDB,
 {
     useNewUrlParser: true,
