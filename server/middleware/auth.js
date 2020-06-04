@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const {OAuth2Client} = require('google-auth-library');
+const client = new OAuth2Client(process.env.CLIENT_ID);
 //=======================
 //Verifica token
 //=======================
@@ -17,7 +19,29 @@ let verifyToken = ( req,res,next)=>{
         next();
     });
 }
-
+//=======================
+//Verifica token google
+//=======================
+let verifyTokenGoogle = async ( req,res,next)=>{
+    let token = req.body.idtoken;
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.CLIENT_ID
+    }).catch(e=>{
+        return res.status(403).json({
+            ok:false,
+            err:e
+        })
+    })
+    const payload = ticket.getPayload();
+    req.usuario = {
+        nombre: payload.name,
+        email: payload.email,
+        img: payload.picture,
+        google: true
+    };
+    next();
+}
 //=======================
 //Verifica Role
 //=======================
@@ -37,5 +61,6 @@ let verifyAdminRole = ( req,res,next)=>{
 }
 module.exports ={
     verifyToken,
-    verifyAdminRole
+    verifyAdminRole,
+    verifyTokenGoogle
 }

@@ -21,3 +21,7 @@ process.env.URLDB = urlDB;
 //==========================
 process.env.CADUCIDAD_TOKEN = 60*60*24*30;
 process.env.SEED = process.env.SEED || "secret_key_21459841";
+//==========================
+//Google config
+//==========================
+process.env.CLIENT_ID = process.env.CLIENT_ID || "903891432309-8g6ncp2bvs5psi0ir1nia2186bod7qeh.apps.googleusercontent.com"
